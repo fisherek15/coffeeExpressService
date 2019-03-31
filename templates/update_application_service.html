@@ -1,0 +1,54 @@
+{% extends 'main_template.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block title %} Aktualizacja zgłoszenia {% endblock %}
+{% block body %}
+
+    <div class="main_div">
+
+        <form method="post" role="role" enctype="multipart/form-data">
+            <h2 style="text-align:center">Aktualizacja zgłoszenia - {{ applicationOrderId }}</h2><br/>
+            {% csrf_token %}
+
+            <div class="card border-secondary mb-3">
+                <div class="card-header" style="background-color: #E9E9E9;">Rodzaj zleconych czynności, opis usterki</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Opis dla serwisu</label>
+                            <textarea class="form-control" rows="3" readonly>{{ descriptionForService }}</textarea>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ applicationForm.description_from_service|bootstrap }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            {{ applicationForm.service_repair_cost|bootstrap }}
+                        </div>
+                        <div class="col-auto"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    {{ applicationForm.status|bootstrap }}
+                </div>
+                <div class="col-9"></div>
+            </div>
+            <br/>
+            <div class="form-group" align="right">
+                <a class="btn btn-secondary" href="{% url 'applications_service' %}" role="button">Anuluj</a>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </div>
+            <br/>
+        </form>
+
+    </div>
+
+{% endblock %}
+

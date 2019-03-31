@@ -1,0 +1,91 @@
+{% extends 'main_template.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block title %} Aktualizacja zgłoszenia {% endblock %}
+{% block body %}
+
+    <div class="main_div">
+
+        <form method="post" role="role" enctype="multipart/form-data">
+            <h2 style="text-align:center">Aktualizacja zgłoszenia - {{ applicationOrderId }}</h2><br/>
+            {% csrf_token %}
+
+            <div class="card border-secondary mb-3">
+                <div class="card-header" style="background-color: #E9E9E9;">Rodzaj zleconych czynności, opis usterki</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Opis dla serwisu</label>
+                            <textarea class="form-control" rows="3" readonly>{{ descriptionForService }}</textarea>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Opis od serwisu</label>
+                            <textarea class="form-control" rows="3" readonly>{{ descriptionFromService }}</textarea>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-3">
+                            <label>Koszty poniesione przez serwis</label>
+                            <textfield class="form-control" readonly>{{ serviceRepairCost }}</textfield>
+                        </div>
+                        <div class="col-auto"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-secondary mb-3">
+                <div class="card-header" style="background-color: #E9E9E9;">Finalizacja zgłoszenia</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            {{ applicationForm.description_for_customer|bootstrap }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            {{ applicationForm.sms_sent_date|bootstrap }}
+                            <script>
+                                $('#id_sms_sent_date').datepicker({
+                                    uiLibrary: 'bootstrap4',
+                                    modal: false,
+                                    footer: false,
+                                    format: 'dd.mm.yyyy'
+                                });
+                            </script>
+                        </div>
+                        <div class="col-3">
+                            {{ applicationForm.repair_cost|bootstrap }}
+                        </div>
+                        <div class="col-4">
+                            {{ applicationForm.return_date|bootstrap }}
+                            <script>
+                                $('#id_return_date').datepicker({
+                                    uiLibrary: 'bootstrap4',
+                                    modal: false,
+                                    footer: false,
+                                    format: 'dd.mm.yyyy'
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    {{ applicationForm.status|bootstrap }}
+                </div>
+                <div class="col-9"></div>
+            </div>
+            <br/>
+            <div class="form-group" align="right">
+                <a class="btn btn-secondary" href="{% url 'applications_shop' %}" role="button">Anuluj</a>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </div>
+            <br/>
+        </form>
+
+    </div>
+
+{% endblock %}
+

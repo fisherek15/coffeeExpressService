@@ -1,0 +1,162 @@
+{% extends 'main_template.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block title %} Edycja zgłoszenia {% endblock %}
+{% block body %}
+
+    <div class="main_div">
+
+        <form method="post" role="role" enctype="multipart/form-data">
+            <h2 style="text-align:center">Edycja zgłoszenia - {{ applicationOrderId }}</h2><br/>
+            {% csrf_token %}
+            <div class="card border-secondary mb-3">
+                <div class="card-header" style="background-color: #E9E9E9;">Zgłoszenie</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            {{ applicationForm.order_id|bootstrap }}
+                        </div>
+                        <div class="col-3">
+                            {{ applicationForm.order_type|bootstrap }}
+                        </div>
+                        <div class="col-3"></div>
+                        <div class="col-3">
+                            {{ applicationForm.acceptance_date|bootstrap }}
+                            <script>
+                                $('#id_acceptance_date').datepicker({
+                                    uiLibrary: 'bootstrap4',
+                                    modal: false,
+                                    footer: false,
+                                    format: 'dd.mm.yyyy'
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-secondary mb-3">
+                <div class="card-header" style="background-color: #E9E9E9;">Dane klienta</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            {{ customerForm.first_name|bootstrap }}
+                        </div>
+                        <div class="col-6">
+                            {{ customerForm.last_name|bootstrap }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            {{ customerForm.phone_number|bootstrap }}
+                        </div>
+                        <div class="col-6">
+                            {{ customerForm.email|bootstrap }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-secondary mb-3">
+                <div class="card-header" style="background-color: #E9E9E9;">Informacje o urządzeniu</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            {{ deviceForm.producer|bootstrap }}
+                        </div>
+                        <div class="col-3">
+                            {{ deviceForm.type|bootstrap }}
+                        </div>
+                        <div class="col-3">
+                            {{ deviceForm.model|bootstrap }}
+                        </div>
+                        <div class="col-3">
+                            {{ deviceForm.id_number|bootstrap }}
+                        </div>
+                    </div>
+                    <div>
+                        {{ applicationForm.technical_condition|bootstrap }}
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                                {{ applicationForm.max_repair_cost|bootstrap }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-secondary mb-3">
+                <div class="card-header" style="background-color: #E9E9E9;">Rodzaj zleconych czynności, opis usterki</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            {{ applicationForm.description_for_service|bootstrap }}
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ applicationForm.description_from_service|bootstrap }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            {{ applicationForm.service_repair_cost|bootstrap }}
+                        </div>
+                        <div class="col-auto"></div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ applicationForm.description_for_customer|bootstrap }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-secondary mb-3">
+                <div class="card-header" style="background-color: #E9E9E9;">Finalizacja zgłoszenia</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            {{ applicationForm.sms_sent_date|bootstrap }}
+                            <script>
+                                $('#id_sms_sent_date').datepicker({
+                                    uiLibrary: 'bootstrap4',
+                                    modal: false,
+                                    footer: false,
+                                    format: 'dd.mm.yyyy'
+                                });
+                            </script>
+                        </div>
+                        <div class="col-3">
+                            {{ applicationForm.repair_cost|bootstrap }}
+                        </div>
+                        <div class="col-4">
+                            {{ applicationForm.return_date|bootstrap }}
+                            <script>
+                                $('#id_return_date').datepicker({
+                                    uiLibrary: 'bootstrap4',
+                                    modal: false,
+                                    footer: false,
+                                    format: 'dd.mm.yyyy'
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    {{ applicationForm.status|bootstrap }}
+                </div>
+                <div class="col-9"></div>
+            </div>
+            <br/>
+            <div class="form-group" align="right">
+                <a class="btn btn-secondary" href="{% url 'applications' %}" role="button">Anuluj</a>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </div>
+            <br/>
+        </form>
+
+    </div>
+
+{% endblock %}
+

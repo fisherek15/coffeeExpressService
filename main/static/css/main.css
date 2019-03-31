@@ -1,0 +1,25 @@
+body {
+    color: #444;
+
+}
+
+.main_div {
+    padding-top: 0%;
+    padding-bottom: 0%;
+    width: 80%;
+    margin: auto;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px dashed #8c8b8b;
+}
+
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+}
+

@@ -1,0 +1,34 @@
+{% extends 'main_template.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block title %} Konwersacja do zgłoszenia {% endblock %}
+{% block body %}
+
+    <div class="main_div">
+
+        <form method="post" role="role" enctype="multipart/form-data">
+            <h2 style="text-align:center">Konwersacja do zgłoszenia - {{ orderId }}</h2><br/>
+            {% csrf_token %}
+            {% for comment in comments %}
+            <div class="card">
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>{{ comment.content }}</p>
+                        <footer class="blockquote-footer"><cite>{{ comment.author }}</cite> <cite>[{{ comment.published_date }}]</cite></footer>
+                    </blockquote>
+                </div>
+            </div><br/>
+            {% endfor %}
+            <br/>
+            <div>{{ commentForm|bootstrap }}</div>
+            <div class="form-group" align="right">
+                <a class="btn btn-secondary" href="{% url 'applications' %}" role="button">Wróć do listy zgłoszeń</a>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </div>
+            <br/>
+        </form>
+
+    </div>
+
+{% endblock %}
+

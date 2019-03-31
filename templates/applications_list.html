@@ -1,0 +1,46 @@
+{% extends 'main_template.html' %}
+{% load static %}
+{% block title %} Zgłoszenia {% endblock %}
+{% block body %}
+{% include 'confirm_delete_modal.html' %}
+
+    <div class="main_div">
+
+        <h2 style="text-align:center">Lista zgłoszeń</h2><br/>
+        <div>
+            <a href="{% url 'new_application' %}"><i class="far fa-plus-square "></i> Nowe zgłoszenie</a><br/><br/>
+        </div>
+
+        <table id="nice_datatable" class="table table-striped table-bordered table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Zgłoszenie</th>
+                    <th scope="col">Data przyjęcia</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Komentarz</th>
+                    <th scope="col">Akcja</th>
+                </tr>
+             </thead>
+            <tbody>
+                {% for application in applications %}
+                    <tr>
+                        <th scope="row">{{ application.id }}</th>
+                        <td><a href="{% url 'readonly_application' application.id %}">{{ application.order_id }}</a></td>
+                        <td>{{ application.acceptance_date }}</td>
+                        <td>{{ application.status }}</td>
+                        <td>
+                            <a href="{% url 'comments' application.id %}" data-toggle="tooltip" data-placement="right" title="Zobacz konwersację"><i class="far fa-comments"></i> NEW!</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_application' application.id %}"><i class="far fa-edit" data-toggle="tooltip" data-placement="right" title="Edytuj"></i></a>
+                            <a href="{% url 'remove_application' application.id %}"><i class="far fa-trash-alt" data-toggle="tooltip" data-placement="right" title="Usuń"></i></a>
+                            <a href="{% url 'question_delete' application.id %}" class="confirm-delete" title="Delete" data-toggle="modal" data-target="#confirmDeleteModal" id="deleteButton{{application.id}}"><i class="far fa-trash-alt" data-toggle="tooltip" data-placement="right" title="Usuń - modal"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
