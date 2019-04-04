@@ -29,6 +29,31 @@
                     </div>
                 </div>
             </div>
+             <div class="card border-secondary mb-3">
+                <div class="card-header" style="background-color: #E9E9E9;">Dane klienta</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Imię</label>
+                            <textfield class="form-control" readonly>{{ customer.first_name }}</textfield>
+                        </div>
+                        <div class="col-6">
+                            <label>Nazwisko</label>
+                            <textfield class="form-control" readonly>{{ customer.last_name }}</textfield>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Telefon</label>
+                            <textfield class="form-control" readonly>{{ customer.phone_number }}</textfield>
+                        </div>
+                        <div class="col-6">
+                            <label>Email</label>
+                            <textfield class="form-control" readonly>{{ customer.email }}</textfield>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card border-secondary mb-3">
                 <div class="card-header" style="background-color: #E9E9E9;">Informacje o urządzeniu</div>
                 <div class="card-body">
@@ -68,17 +93,16 @@
                     <div class="row">
                         <div class="col-12">
                             <label>Opis dla serwisu</label>
-                        <textarea class="form-control" rows="4" readonly>{{ application.description_for_service }}</textarea>
+                            <textarea class="form-control" rows="4" readonly>{{ application.description_for_service }}</textarea>
                         </div>
                     </div>
                     <hr/>
                     <div class="row">
                         <div class="col-12">
                             <label>Opis od serwisu</label>
-                        <textarea class="form-control" rows="4" readonly>{{ application.description_from_service }}</textarea>
+                            <textarea class="form-control" rows="4" readonly>{{ application.description_from_service }}</textarea>
                         </div>
-                    </div>
-                    <br/>
+                    </div><br/>
                     <div class="row">
                         <div class="col-3">
                             <label>Koszty poniesione przez serwis</label>
@@ -88,9 +112,34 @@
                     </div>
                 </div>
             </div>
+            <div class="card border-secondary mb-3">
+                <div class="card-header" style="background-color: #E9E9E9;">Finalizacja zgłoszenia</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Opis dla klienta</label>
+                            <textarea class="form-control" rows="4" readonly>{{ application.description_for_customer }}</textarea>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-5">
+                            <label>Data wysłania SMSa z powiadomieniem do klienta</label>
+                            <textfield class="form-control" readonly>{{ application.sms_sent_date }}</textfield>
+                        </div>
+                        <div class="col-3">
+                            <label>Całkowity kosztu usługi</label>
+                            <textfield class="form-control" readonly>{{ application.repair_cost }}</textfield>
+                        </div>
+                        <div class="col-4">
+                            <label>Data odebrania urządzenia przez klienta</label>
+                            <textfield class="form-control" readonly>{{ application.return_date }}</textfield>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <br/>
             <div class="form-group" align="right">
-                <a class="btn btn-secondary" href="{% url 'applications_service' %}" role="button">Wróć do listy zgłoszeń</a>
+                <a class="btn btn-secondary" href="{% url 'applications' %}" role="button">Wróć do listy zgłoszeń</a>
             </div>
             <br/>
         </form>

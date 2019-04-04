@@ -7,7 +7,7 @@
 
         <h2 style="text-align:center">Lista zgłoszeń</h2><br/>
         <div>
-            <a href="{% url 'new_application' %}"><i class="far fa-plus-square "></i> Nowe zgłoszenie</a><br/><br/>
+            <a href="{% url 'new_application_shop' %}"><i class="far fa-plus-square "></i> Nowe zgłoszenie</a><br/><br/>
         </div>
 
         <table id="nice_datatable" class="table table-striped table-bordered table table-sm">
@@ -27,7 +27,7 @@
                         <th scope="row">{{ application.id }}</th>
                         <td><a href="{% url 'readonly_application_shop' application.id %}">{{ application.order_id }}</a></td>
                         <td>{{ application.acceptance_date }}</td>
-                        <td>{{ application.status }}</td>
+                        <td>USTAWIĆ STATUS!</td>
                         <td>
                             <a href="#" data-toggle="tooltip" data-placement="right" title="Zobacz konwersację"><i class="far fa-comments"></i> NEW!</a>
                         </td>

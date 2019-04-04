@@ -57,16 +57,6 @@ class Order(models.Model):
         validators=[MinValueValidator(Decimal('0.00'))],
         verbose_name="Całkowity koszt usługi")
     return_date = models.DateField(null=True, blank=True, verbose_name="Data odebrania urządzenia przez klienta")
-
-    STATUS1 = 'ST1'
-    STATUS2 = 'ST2'
-    STATUS3 = 'ST3'
-    STATUS = (
-        (STATUS1, 'Status 1'),
-        (STATUS2, 'Status 2'),
-        (STATUS3, 'Status 3'),
-    )
-    status = models.CharField(max_length=100, choices=STATUS, verbose_name="Status zgłoszenia")
     device = models.OneToOneField(Device, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
@@ -81,5 +71,12 @@ class Comment(models.Model):
     content = models.TextField(verbose_name="Twój komentarz")
     published_date = models.DateTimeField(default=datetime.now)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, related_name='comments', on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+
+class Status(models.Model):
+    content = models.TextField(verbose_name="Status zgłoszenia")
+    date_of_change = models.DateTimeField(default=datetime.now)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 

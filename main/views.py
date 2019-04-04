@@ -29,11 +29,7 @@ def start(request):
         applications = Order.objects.all()
         return render(request, 'applications_list_shop.html', {'applications': applications})
     else:
-        applications = Order.objects.all()
-        return render(request, 'applications_list.html', {'applications': applications})
-
-def read_only_application(request):
-    return HttpResponse('Read only an application for customer.')
+        return HttpResponse('Nie masz uprawnień do wyświetlania tej strony. Skontaktuj się z administratorem.')
 
 
 @login_required
@@ -58,7 +54,7 @@ def applications_list_service(request):
 
 
 @login_required
-@group_required('admin', 'shop')
+@group_required('admin')
 def new_application(request):
     device_form = DeviceForm(request.POST or None)
     customer_form = CustomerForm(request.POST or None)
@@ -70,6 +66,23 @@ def new_application(request):
         order.save()
         return redirect(applications_list)
     return render(request, 'new_application.html', {'deviceForm': device_form, 'customerForm': customer_form,
+                                                    'applicationForm': application_form})
+
+
+@login_required
+@group_required('shop')
+def new_application_shop(request):
+    device_form = DeviceForm(request.POST or None)
+    customer_form = CustomerForm(request.POST or None)
+    application_form = ApplicationForm(request.POST or None)
+    if customer_form.is_valid() and application_form.is_valid() and device_form.is_valid():
+        order = application_form.save(commit=False)
+        order.status_all = order.status_shop;
+        order.customer = customer_form.save()
+        order.device = device_form.save()
+        order.save()
+        return redirect(applications_list_shop)
+    return render(request, 'new_application_shop.html', {'deviceForm': device_form, 'customerForm': customer_form,
                                                     'applicationForm': application_form})
 
 
@@ -97,7 +110,9 @@ def update_application_service(request, id):
     application = get_object_or_404(Order, pk=id)
     application_form = ServiceApplicationForm(request.POST or None, instance=application)
     if application_form.is_valid():
-        application_form.save()
+        order = application_form.save(commit=False)
+        order.status_all = order.status_service
+        order.save()
         return redirect(applications_list_service)
     return render(request, 'update_application_service.html',
                   {'applicationOrderId': application.order_id,
@@ -111,7 +126,9 @@ def update_application_shop(request, id):
     application = get_object_or_404(Order, pk=id)
     application_form = ShopApplicationForm(request.POST or None, instance=application)
     if application_form.is_valid():
-        application_form.save()
+        order = application_form.save(commit=False)
+        order.status_all = order.status_shop
+        order.save()
         return redirect(applications_list_shop)
     return render(request, 'update_application_shop.html',
                   {'applicationOrderId': application.order_id,
@@ -122,20 +139,18 @@ def update_application_shop(request, id):
 
 
 @login_required
-@group_required('admin')
-def remove_application(request, id):
-    application = get_object_or_404(Order, pk=id)
-    if request.method == 'POST':
-        application.delete()
-        return redirect(applications_list)
-    return render(request, 'confirm.html', {'application': application})
-
-
-@login_required
-@group_required('admin', 'shop')
+@group_required('shop')
 def readonly_application_shop(request, id):
     application = get_object_or_404(Order, pk=id)
     return render(request, 'readonly_application_shop.html',
+                  {'application': application, 'device': application.device, 'customer': application.customer})
+
+
+@login_required
+@group_required('admin')
+def readonly_application(request, id):
+    application = get_object_or_404(Order, pk=id)
+    return render(request, 'readonly_application.html',
                   {'application': application, 'device': application.device, 'customer': application.customer})
 
 
@@ -154,18 +169,19 @@ def check_my_application(request):
 def search_form(request):
     orderId = None
     str_date = None
-    status = None
+    # status = None
     if request.POST.get('search'):
         result = request.POST.get('search')
         order = get_object_or_404(Order, order_id=result)
         orderId = order.order_id
         date_time = order.acceptance_date
         str_date = date_time.strftime("%d-%m-%Y")
-        status = order.status
-    return render(request, 'search_form.html', {'orderId': orderId, 'acceptanceDate': str_date, 'status': status})
+        # status = order.status
+    return render(request, 'search_form.html', {'orderId': orderId, 'acceptanceDate': str_date}) # 'status': status})
 
 
 @login_required
+@group_required('admin', 'shop', 'service')
 def comments(request, id):
     application = get_object_or_404(Order, pk=id)
     comments = Comment.objects.filter(order=application).order_by('published_date')
@@ -179,7 +195,9 @@ def comments(request, id):
 
 
 @login_required()
+@group_required('admin')
 def question_delete(request, id):
     application = get_object_or_404(Order, pk=id)
     application.delete()
     return redirect(applications_list)
+

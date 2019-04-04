@@ -9,7 +9,7 @@ class CustomerAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('order_id', 'acceptance_date', 'status')
+    list_display = ('order_id', 'acceptance_date')
 
 
 @admin.register(Comment)
