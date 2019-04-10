@@ -13,16 +13,15 @@
                 <div class="card-header" style="background-color: #E9E9E9;">Zgłoszenie</div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col">
                             <label>Numer zgłoszenia</label>
                             <textfield class="form-control" readonly>{{ application.order_id }}</textfield>
                         </div>
-                        <div class="col-3">
+                        <div class="col">
                             <label>Rodzaj zlecenia</label>
                             <textfield class="form-control" readonly>{{ application.order_type }}</textfield>
                         </div>
-                        <div class="col-3"></div>
-                        <div class="col-3">
+                        <div class="col">
                             <label>Data przyjęcia zgłoszenia</label>
                             <textfield class="form-control" readonly>{{ application.acceptance_date }}</textfield>
                         </div>
@@ -33,19 +32,19 @@
                 <div class="card-header" style="background-color: #E9E9E9;">Informacje o urządzeniu</div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col">
                             <label>Producent</label>
                             <textfield class="form-control" readonly>{{ device.producer }}</textfield>
                         </div>
-                        <div class="col-3">
+                        <div class="col">
                             <label>Typ</label>
                             <textfield class="form-control" readonly>{{ device.type }}</textfield>
                         </div>
-                        <div class="col-3">
+                        <div class="col">
                             <label>Model</label>
                             <textfield class="form-control" readonly>{{ device.model }}</textfield>
                         </div>
-                        <div class="col-3">
+                        <div class="col">
                             <label>Numer seryjny</label>
                             <textfield class="form-control" readonly>{{ device.id_number }}</textfield>
                         </div>
@@ -55,7 +54,7 @@
                         <textarea class="form-control" rows="4" readonly>{{ application.technical_condition }}</textarea>
                     </div><br/>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col">
                             <label>Maksymalny koszt naprawy bez konsultacji z serwisem</label>
                             <textfield class="form-control" readonly>{{ application.max_repair_cost }}</textfield>
                         </div>
@@ -66,25 +65,30 @@
                 <div class="card-header" style="background-color: #E9E9E9;">Rodzaj zleconych czynności, opis usterki</div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col">
                             <label>Opis dla serwisu</label>
                         <textarea class="form-control" rows="4" readonly>{{ application.description_for_service }}</textarea>
                         </div>
                     </div>
                     <hr/>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col">
+                            <label>Wykonana czynność</label>
+                            <textfield class="form-control" readonly>{{ application.realized_activity }}</textfield>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col">
                             <label>Opis od serwisu</label>
                         <textarea class="form-control" rows="4" readonly>{{ application.description_from_service }}</textarea>
                         </div>
                     </div>
                     <br/>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col">
                             <label>Koszty poniesione przez serwis</label>
                             <textfield class="form-control" readonly>{{ application.service_repair_cost }}</textfield>
                         </div>
-                        <div class="col-auto"></div>
                     </div>
                 </div>
             </div>

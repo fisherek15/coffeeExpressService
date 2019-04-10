@@ -28,7 +28,9 @@
                         <th scope="row">{{ application.id }}</th>
                         <td><a href="{% url 'readonly_application' application.id %}">{{ application.order_id }}</a></td>
                         <td>{{ application.acceptance_date }}</td>
-                        <td>USTAWIĆ STATUS!</td>
+                        <td>
+                            <a href="{% url 'statuses' application.id %}" data-toggle="tooltip" data-placement="right" title="Zobacz status"><i class="far fa-flag"></i> NEW!</a>
+                        </td>
                         <td>
                             <a href="{% url 'comments' application.id %}" data-toggle="tooltip" data-placement="right" title="Zobacz konwersację"><i class="far fa-comments"></i> NEW!</a>
                         </td>

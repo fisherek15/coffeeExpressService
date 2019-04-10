@@ -1,8 +1,8 @@
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Order, Comment
-from .forms import ApplicationForm, CustomerForm, DeviceForm, ServiceApplicationForm, ShopApplicationForm, CommentForm
+from .models import Order, Comment, Status
+from .forms import ApplicationForm, CustomerForm, DeviceForm, ServiceApplicationForm, ShopApplicationForm, CommentForm, StatusForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 
@@ -111,7 +111,6 @@ def update_application_service(request, id):
     application_form = ServiceApplicationForm(request.POST or None, instance=application)
     if application_form.is_valid():
         order = application_form.save(commit=False)
-        order.status_all = order.status_service
         order.save()
         return redirect(applications_list_service)
     return render(request, 'update_application_service.html',
@@ -127,7 +126,6 @@ def update_application_shop(request, id):
     application_form = ShopApplicationForm(request.POST or None, instance=application)
     if application_form.is_valid():
         order = application_form.save(commit=False)
-        order.status_all = order.status_shop
         order.save()
         return redirect(applications_list_shop)
     return render(request, 'update_application_shop.html',
@@ -192,6 +190,20 @@ def comments(request, id):
         comment.order = application
         comment.save()
     return render(request, 'comments.html', {'orderId': application.order_id, 'comments': comments, 'commentForm': comment_form})
+
+
+@login_required
+@group_required('admin', 'shop', 'service')
+def statuses(request, id):
+    application = get_object_or_404(Order, pk=id)
+    statuses = Status.objects.filter(order=application).order_by('date_of_change')
+    if request.POST.get('selected_status'):
+        status = Status()
+        status.content = request.POST.get('selected_status')
+        status.author = request.user
+        status.order = application
+        status.save()
+    return render(request, 'statuses.html', {'orderId': application.order_id, 'statuses': statuses})
 
 
 @login_required()

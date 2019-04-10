@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import applications_list, new_application, edit_application, readonly_application, new_application_shop, \
     check_my_application, update_application_service, update_application_shop, applications_list_service, \
-    applications_list_shop, readonly_application_service, readonly_application_shop, start, search_form, comments, question_delete
+    applications_list_shop, readonly_application_service, readonly_application_shop, start, search_form, comments, question_delete, statuses
 
 from django.urls import include, path
 
@@ -27,6 +27,9 @@ urlpatterns = [
 
     path('myapplication/', check_my_application, name='check_my_application'),
     path('applications/comments/<int:id>/', comments, name='comments'),
+    path('applications/statuses/<int:id>/', statuses, name='statuses'),
     path('applications/delete/<int:id>/', question_delete, name='question_delete'),
+
+
 ]
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, Order, Comment, Device
+from .models import Customer, Order, Comment, Device, Status
 
 
 @admin.register(Customer)
@@ -15,6 +15,11 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('author', 'published_date', 'order')
+
+
+@admin.register(Status)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('author', 'date_of_change', 'order')
 
 
 @admin.register(Device)

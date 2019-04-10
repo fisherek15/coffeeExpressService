@@ -1,4 +1,5 @@
 from collections import defaultdict
+from multiselectfield import MultiSelectField
 
 from django.db import models
 from datetime import datetime
@@ -34,6 +35,12 @@ class Order(models.Model):
     description_for_service = models.TextField(verbose_name="Opis dla serwisu")
     description_from_service = models.TextField(null=True, blank=True, verbose_name="Opis od serwisu")
     description_for_customer = models.TextField(null=True, blank=True, verbose_name="Opis dla klienta")
+
+    ACTIVITIES = (('Odkawianie', 'Odkawianie'),
+                  ('Odkamienianie', 'Odkamienianie'),
+                  ('Czyszczenie bloku', 'Czyszczenie bloku'),
+                  ('Wymiana uszczelek', 'Wymiana uszczelek'))
+    realized_activity = MultiSelectField(choices=ACTIVITIES, verbose_name="Wykonana czynność")
     max_repair_cost = models.DecimalField(
         max_digits=7,
         decimal_places=2,

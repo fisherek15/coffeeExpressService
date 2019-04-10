@@ -98,6 +98,12 @@
                     </div>
                     <hr/>
                     <div class="row">
+                        <div class="col">
+                            <label>Wykonana czynność</label>
+                            <textfield class="form-control" readonly>{{ application.realized_activity }}</textfield>
+                        </div>
+                    </div><br/>
+                    <div class="row">
                         <div class="col-12">
                             <label>Opis od serwisu</label>
                             <textarea class="form-control" rows="4" readonly>{{ application.description_from_service }}</textarea>

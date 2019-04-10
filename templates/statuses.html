@@ -1,0 +1,50 @@
+{% extends 'main_template.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block title %} Status zgłoszenia {% endblock %}
+{% block body %}
+
+    <div class="main_div">
+
+        <form method="post" role="role" enctype="multipart/form-data">
+            <h2 style="text-align:center">Status zgłoszenia - {{ orderId }}</h2><br/>
+            {% csrf_token %}
+            {% for status in statuses %}
+            <div class="card">
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>{{ status.content }}</p>
+                        <footer class="blockquote-footer"><cite>{{ status.author }}</cite> <cite>[{{ status.date_of_change }}]</cite></footer>
+                    </blockquote>
+                </div>
+            </div><br/>
+            {% endfor %}
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Zmień status</label>
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="selected_status">
+                <option selected>--------</option>
+                <option value="Sklep / Przyjęte">Przyjęte</option>
+                <option value="Sklep / Gotowe do serwisu">Gotowe do serwisu</option>
+                <option value="Sklep / Do odbioru">Do odbioru</option>
+                <option value="Sklep / Odebrane z serwisu">Odebrane z serwisu</option>
+                <option value="Sklep / SMS I - wysłany">SMS I - wysłany</option>
+                <option value="Sklep / SMS II - wysłany">SMS II - wysłany</option>
+                <option value="Sklep / Porzucone">Porzucone</option>
+                <option value="Sklep / Reklamacja">Reklamacja</option>
+                <option value="Sklep / Zakończone">Zakończone</option>
+                <option value="Serwis / Przyjęte">Przyjęte</option>
+                <option value="Serwis / Realizowane">Realizowane</option>
+                <option value="Serwis / Do konsultacji">Do konsultacji</option>
+                <option value="Serwis / Zrobione">Zrobione</option>
+                <option value="Serwis / Złomowanie">Złomowanie</option>
+            </select><br/><br/><br/>
+            <div class="form-group" align="right">
+                <a class="btn btn-secondary" href="{% url 'applications' %}" role="button">Wróć do listy zgłoszeń</a>
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+            </div>
+            <br/>
+        </form>
+
+    </div>
+
+{% endblock %}
+
