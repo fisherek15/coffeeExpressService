@@ -5,6 +5,8 @@ from .models import Order, Comment, Status
 from .forms import ApplicationForm, CustomerForm, DeviceForm, ServiceApplicationForm, ShopApplicationForm, CommentForm, StatusForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
+from django.core.exceptions import ObjectDoesNotExist
+import logging
 
 
 def group_required(*group_names):
@@ -35,7 +37,18 @@ def start(request):
 @login_required
 @group_required('admin')
 def applications_list(request):
-    applications = Order.objects.all()
+    applications = []
+    all_applications = Order.objects.all()
+    for application in all_applications:
+        status = Status.objects.filter(order=application).order_by('-date_of_change').first()
+        order = {
+            'id': application.id,
+            'order_id': application.order_id,
+            'acceptance_date': application.acceptance_date,
+            'status': status.content
+        }
+        applications.append(order)
+    applications.reverse()
     return render(request, 'applications_list.html', {'applications': applications})
 
 
@@ -60,10 +73,24 @@ def new_application(request):
     customer_form = CustomerForm(request.POST or None)
     application_form = ApplicationForm(request.POST or None)
     if customer_form.is_valid() and application_form.is_valid() and device_form.is_valid():
+        today = datetime.today()
+        current_month = today.month
+        current_year = today.year
+        try:
+            last_order = Order.objects.latest('id')
+            last_id = last_order.pk + 1
+        except ObjectDoesNotExist:
+            last_id = 0
         order = application_form.save(commit=False)
         order.customer = customer_form.save()
         order.device = device_form.save()
+        order.order_id = str(last_id) + "/" + str(current_month) + "/" + str(current_year)
         order.save()
+        status = Status()
+        status.order = order
+        status.author = request.user
+        status.content = "Sklep / Przyjęte"
+        status.save()
         return redirect(applications_list)
     return render(request, 'new_application.html', {'deviceForm': device_form, 'customerForm': customer_form,
                                                     'applicationForm': application_form})

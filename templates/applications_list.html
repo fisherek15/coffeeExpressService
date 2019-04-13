@@ -29,10 +29,11 @@
                         <td><a href="{% url 'readonly_application' application.id %}">{{ application.order_id }}</a></td>
                         <td>{{ application.acceptance_date }}</td>
                         <td>
-                            <a href="{% url 'statuses' application.id %}" data-toggle="tooltip" data-placement="right" title="Zobacz status"><i class="far fa-flag"></i> NEW!</a>
+                            <a href="{% url 'statuses' application.id %}" data-toggle="tooltip" data-placement="right" title="Zobacz status"><i class="far fa-flag"></i></a>
+                            {{ application.status }}
                         </td>
                         <td>
-                            <a href="{% url 'comments' application.id %}" data-toggle="tooltip" data-placement="right" title="Zobacz konwersację"><i class="far fa-comments"></i> NEW!</a>
+                            <a href="{% url 'comments' application.id %}" data-toggle="tooltip" data-placement="right" title="Zobacz konwersację"><i class="far fa-comments"></i></a>
                         </td>
                         <td>
                             <a href="{% url 'edit_application' application.id %}"><i class="far fa-edit" data-toggle="tooltip" data-placement="right" title="Edytuj"></i></a>

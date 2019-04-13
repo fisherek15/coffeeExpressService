@@ -40,7 +40,7 @@ class Order(models.Model):
                   ('Odkamienianie', 'Odkamienianie'),
                   ('Czyszczenie bloku', 'Czyszczenie bloku'),
                   ('Wymiana uszczelek', 'Wymiana uszczelek'))
-    realized_activity = MultiSelectField(choices=ACTIVITIES, verbose_name="Wykonana czynność")
+    realized_activity = MultiSelectField(choices=ACTIVITIES, null=True, blank=True, verbose_name="Wykonana czynność")
     max_repair_cost = models.DecimalField(
         max_digits=7,
         decimal_places=2,

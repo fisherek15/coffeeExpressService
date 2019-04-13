@@ -30,7 +30,7 @@ class ApplicationForm(ModelForm):
     class Meta:
         model = Order
         fields = ['order_id', 'order_type', 'acceptance_date', 'description_for_service', 'description_from_service',
-                  'description_for_customer', 'max_repair_cost', 'technical_condition', 'realized_activity',
+                  'description_for_customer', 'max_repair_cost', 'technical_condition',
                   'service_repair_cost', 'sms_sent_date', 'repair_cost', 'return_date']
         acceptance_date = DateField(
         )
