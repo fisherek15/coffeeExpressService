@@ -24,5 +24,5 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Device)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('producer', 'type', 'model', 'id_number')
+    list_display = ('producer', 'model', 'id_number')
 

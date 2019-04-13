@@ -65,9 +65,6 @@
                             {{ deviceForm.producer|bootstrap }}
                         </div>
                         <div class="col-3">
-                            {{ deviceForm.type|bootstrap }}
-                        </div>
-                        <div class="col-3">
                             {{ deviceForm.model|bootstrap }}
                         </div>
                         <div class="col-3">
@@ -96,7 +93,7 @@
             </div>
             <br/>
             <div class="form-group" align="right">
-                <a class="btn btn-secondary" href="{% url 'applications' %}" role="button">Anuluj</a>
+                <a class="btn btn-secondary" href="{% url 'start' %}" role="button">Anuluj</a>
                 <button type="submit" class="btn btn-primary">Zapisz</button>
             </div>
             <br/>

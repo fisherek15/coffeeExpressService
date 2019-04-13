@@ -1,6 +1,4 @@
-{% load bootstrap %}
 {% load static %}
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,42 +7,66 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
                 integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
-    <title></title>
+    <title>Wyszukaj zgłoszenie</title>
 </head>
 <body>
-    <div class="card" style="width: 50%">
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-between" style="height: 64px; background-color: #DCDCDC;">
+        <a class="navbar-brand">
+            <img src="{% static 'images/logo.png' %}" width="40" height="40" class="d-inline-block align-top" alt="" >
+            <span style="vertical-align:middle">adam's BLEND</span>
+        </a>
+    </nav>
+    <br/><br/>
+    <h2 style="text-align:center">Sprawdź czy Twoje urządzenie jest gotowe do odbioru!</h2><br/>
+    <div class="card border-secondary mb-3" style="width:50%; margin: auto;">
+        <div class="card-header" style="background-color: #E9E9E9;">Sprawdź status zgłoszenia</div>
         <div class="card-body">
-            {% csrf_token %}
-
-            <form id="searchform" action="{% url 'search' %}" method="get" accept-charset="utf-8">
-      <button class="searchbutton" type="submit">
-        <i class="fa fa-search"></i>
-      </button>
-      <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
-    </form>
-                <hr/>
-                <div><br/>
-                    <label>Data przyjęcia zgłoszenia</label>
-                    <textfield class="form-control" readonly>{{ acceptanceDate }}</textfield>
-                </div><br/>
-                <div>
-                    <label>Status</label>
-                    <textfield class="form-control" readonly>USTAWIĆ STATUS!</textfield>
-                </div>
-
+            <div class="col-auto">
+                <form action="{% url 'check_my_application'%}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="searchField"></label>Numer zgłoszenia<br/>
+                        <input class="form-control" id="searchField" type="text" name="search">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Szukaj <i class="fa fa-search"></i></button>
+                </form>
+           </div>
+        </div>
+    </div>
+    <div class="card border-secondary mb-3" style="width:50%; margin: auto;">
+        <div class="card-header" style="background-color: #E9E9E9;">Wynik wyszukiwania</div>
+        <div class="card-body">
+            <div class="col-auto">
+                <form>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="orderIdField"></label>Numer zgłoszenia<br/>
+                        <input class="form-control" id="orderIdField" type="text" value="{{orderId}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="acceptanceDateField"></label>Data przyjęcia zgłoszenia<br/>
+                        <input class="form-control" id="acceptanceDateField" type="text"
+                           value="{{acceptanceDate}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="statusField"></label>Status<br/>
+                        <input class="form-control" id="statusField" type="text" value="{{status}}" readonly>
+                    </div>
+                </form>
+           </div>
         </div>
     </div>
 </body>
 </html>
-
-
-
-

@@ -63,10 +63,6 @@
                             <textfield class="form-control" readonly>{{ device.producer }}</textfield>
                         </div>
                         <div class="col-3">
-                            <label>Typ</label>
-                            <textfield class="form-control" readonly>{{ device.type }}</textfield>
-                        </div>
-                        <div class="col-3">
                             <label>Model</label>
                             <textfield class="form-control" readonly>{{ device.model }}</textfield>
                         </div>
@@ -112,7 +108,7 @@
                     <div class="row">
                         <div class="col-3">
                             <label>Koszty poniesione przez serwis</label>
-                            <textfield class="form-control" readonly>{{ application.service_repair_cost }}</textfield>
+                            <textfield class="form-control" readonly>{{ application.service_repair_cost|default_if_none:'' }}</textfield>
                         </div>
                         <div class="col-auto"></div>
                     </div>
@@ -130,22 +126,22 @@
                     <div class="row">
                         <div class="col-5">
                             <label>Data wysłania SMSa z powiadomieniem do klienta</label>
-                            <textfield class="form-control" readonly>{{ application.sms_sent_date }}</textfield>
+                            <textfield class="form-control" readonly>{{ application.sms_sent_date|default_if_none:'' }}</textfield>
                         </div>
                         <div class="col-3">
                             <label>Całkowity kosztu usługi</label>
-                            <textfield class="form-control" readonly>{{ application.repair_cost }}</textfield>
+                            <textfield class="form-control" readonly>{{ application.repair_cost|default_if_none:'' }}</textfield>
                         </div>
                         <div class="col-4">
                             <label>Data odebrania urządzenia przez klienta</label>
-                            <textfield class="form-control" readonly>{{ application.return_date }}</textfield>
+                            <textfield class="form-control" readonly>{{ application.return_date|default_if_none:'' }}</textfield>
                         </div>
                     </div>
                 </div>
             </div>
             <br/>
             <div class="form-group" align="right">
-                <a class="btn btn-secondary" href="{% url 'applications' %}" role="button">Wróć do listy zgłoszeń</a>
+                <a class="btn btn-secondary" href="{% url 'start' %}" role="button">Wróć do listy zgłoszeń</a>
             </div>
             <br/>
         </form>

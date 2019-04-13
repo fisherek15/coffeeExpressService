@@ -37,10 +37,6 @@
                             <textfield class="form-control" readonly>{{ device.producer }}</textfield>
                         </div>
                         <div class="col">
-                            <label>Typ</label>
-                            <textfield class="form-control" readonly>{{ device.type }}</textfield>
-                        </div>
-                        <div class="col">
                             <label>Model</label>
                             <textfield class="form-control" readonly>{{ device.model }}</textfield>
                         </div>
@@ -87,14 +83,14 @@
                     <div class="row">
                         <div class="col">
                             <label>Koszty poniesione przez serwis</label>
-                            <textfield class="form-control" readonly>{{ application.service_repair_cost }}</textfield>
+                            <textfield class="form-control" readonly>{{ application.service_repair_cost|default_if_none:'' }}</textfield>
                         </div>
                     </div>
                 </div>
             </div>
             <br/>
             <div class="form-group" align="right">
-                <a class="btn btn-secondary" href="{% url 'applications_service' %}" role="button">Wróć do listy zgłoszeń</a>
+                <a class="btn btn-secondary" href="{% url 'start' %}" role="button">Wróć do listy zgłoszeń</a>
             </div>
             <br/>
         </form>

@@ -37,6 +37,7 @@
                         </td>
                         <td>
                             <a href="{% url 'edit_application' application.id %}"><i class="far fa-edit" data-toggle="tooltip" data-placement="right" title="Edytuj"></i></a>
+                            <a href="{% url 'print_confirmation_for_customer' %}"><i class="far fa-print" data-toggle="tooltip" data-placement="right" title="Drukuj"></i></a>
                             <a href="{% url 'question_delete' application.id %}" class="confirm-delete" title="Delete" data-toggle="modal" data-target="#confirmDeleteModal" id="deleteButton{{application.id}}"><i class="far fa-trash-alt" data-toggle="tooltip" data-placement="right" title="Usuń - modal"></i></a>
                         </td>
                     </tr>

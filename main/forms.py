@@ -1,4 +1,4 @@
-from django.forms import ModelForm, DateField, DateInput
+from django.forms import ModelForm
 from .models import Order, Customer, Device, Comment, Status
 
 
@@ -11,7 +11,7 @@ class CustomerForm(ModelForm):
 class DeviceForm(ModelForm):
     class Meta:
         model = Device
-        fields = ['producer', 'type', 'model', 'id_number']
+        fields = ['producer', 'model', 'id_number']
 
 
 class CommentForm(ModelForm):
@@ -32,8 +32,14 @@ class ApplicationForm(ModelForm):
         fields = ['order_id', 'order_type', 'acceptance_date', 'description_for_service', 'description_from_service',
                   'description_for_customer', 'max_repair_cost', 'technical_condition',
                   'service_repair_cost', 'sms_sent_date', 'repair_cost', 'return_date']
-        acceptance_date = DateField(
-        )
+
+
+class ApplicationFormOnlyAdminEdit(ModelForm):
+    class Meta:
+        model = Order
+        fields = ['order_id', 'order_type', 'acceptance_date', 'description_for_service', 'description_from_service',
+                  'description_for_customer', 'max_repair_cost', 'technical_condition', 'realized_activity',
+                  'service_repair_cost', 'sms_sent_date', 'repair_cost', 'return_date']
 
 
 class ServiceApplicationForm(ModelForm):

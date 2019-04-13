@@ -3,6 +3,13 @@ body {
 
 }
 
+.login_div {
+    padding-top: 0%;
+    padding-bottom: 0%;
+    width: 50%;
+    margin: auto;
+}
+
 .main_div {
     padding-top: 0%;
     padding-bottom: 0%;

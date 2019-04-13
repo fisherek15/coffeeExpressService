@@ -1,20 +1,23 @@
 {% extends 'main_template.html' %}
 {% load bootstrap %}
 {% block title %} Zaloguj się {% endblock %}
-
 {% block body %}
 
-    <div class="card" style="width: 18rem">
-      <div class="card-body">
-        <form method="post" role="form">
-            <legend>Zaloguj się</legend>
-            {% csrf_token %}
-            {{ form|bootstrap }}
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Zaloguj <i class="fas fa-sign-in-alt"></i></button>
-            </div>
-        </form>
-      </div>
+    <div class="login_div">
+
+        <div class="card">
+          <div class="card-body">
+            <form method="post" role="form">
+                <legend>Zaloguj się</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Zaloguj <i class="fas fa-sign-in-alt"></i></button>
+                </div>
+            </form>
+          </div>
+        </div>
+
     </div>
 
 {% endblock %}

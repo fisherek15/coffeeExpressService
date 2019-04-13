@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-3">
                             <label>Koszty poniesione przez serwis</label>
-                            <textfield class="form-control" readonly>{{ serviceRepairCost }}</textfield>
+                            <textfield class="form-control" readonly>{{ serviceRepairCost|default_if_none:'' }}</textfield>
                         </div>
                         <div class="col-auto"></div>
                     </div>
@@ -73,7 +73,7 @@
             </div>
             <br/>
             <div class="form-group" align="right">
-                <a class="btn btn-secondary" href="{% url 'applications_shop' %}" role="button">Anuluj</a>
+                <a class="btn btn-secondary" href="{% url 'start' %}" role="button">Anuluj</a>
                 <button type="submit" class="btn btn-primary">Zapisz</button>
             </div>
             <br/>
