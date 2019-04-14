@@ -211,8 +211,11 @@ def populate_applications_list():
         }
         applications.append(order)
     applications.reverse()
-    assert isinstance(application, object)
-    return applications
+    assert isinstance(applications, object)
+    if len(applications) != 0:
+        return applications
+    else:
+        return all_applications
 
 
 def print_confirmation_for_customer(request, id):
