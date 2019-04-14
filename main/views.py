@@ -217,23 +217,23 @@ def populate_applications_list():
 
 def print_confirmation_for_customer(request, id):
     application = get_object_or_404(Order, pk=id)
-
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'inline; filename="mypdf.pdf"'
-
-    buffer = BytesIO()
-    p = canvas.Canvas(buffer)
-
-    # Start writing the PDF here
-    p.drawString(100, 100, 'Hello world.')
-    # End writing
-
-    p.showPage()
-    p.save()
-
-    pdf = buffer.getvalue()
-    buffer.close()
-    response.write(pdf)
-
-    return response
+    #
+    # response = HttpResponse(content_type='application/pdf')
+    # response['Content-Disposition'] = 'inline; filename="mypdf.pdf"'
+    #
+    # buffer = BytesIO()
+    # p = canvas.Canvas(buffer)
+    #
+    # # Start writing the PDF here
+    # p.drawString(100, 100, 'Hello world.')
+    # # End writing
+    #
+    # p.showPage()
+    # p.save()
+    #
+    # pdf = buffer.getvalue()
+    # buffer.close()
+    # response.write(pdf)
+    #
+    # return response
 
