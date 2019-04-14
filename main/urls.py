@@ -29,7 +29,7 @@ urlpatterns = [
     path('applications/comments/<int:id>/', comments, name='comments'),
     path('applications/statuses/<int:id>/', statuses, name='statuses'),
     path('applications/delete/<int:id>/', question_delete, name='question_delete'),
-    path('print', print_confirmation_for_customer, name='print_confirmation_for_customer'),
+    path('applications/print/<int:id>/', print_confirmation_for_customer, name='print_confirmation_for_customer'),
 
 
 ]

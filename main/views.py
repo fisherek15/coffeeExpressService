@@ -215,7 +215,9 @@ def populate_applications_list():
     return applications
 
 
-def print_confirmation_for_customer(request):
+def print_confirmation_for_customer(request, id):
+    application = get_object_or_404(Order, pk=id)
+
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="mypdf.pdf"'
 
